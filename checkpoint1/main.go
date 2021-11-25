@@ -15,12 +15,11 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	//fmt.Println(req)
-	resp, err := req.SendRequest()
+	//resp, err := req.SendRequest()
 	//resp.ShowHeader()
-	value, err := resp.GetHeader("Passport")
-	req.AddHeader("Passport",value[0])
-        resp1, err := req.SendRequest()
+	//value, err := resp.GetHeader("Passport")
+	//req.AddHeader("Passport",value[0])
+    resp1, err := req.SendRequest()
 	resp1.ShowBody()
 }
