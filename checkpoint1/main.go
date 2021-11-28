@@ -1,26 +1,16 @@
 package main
 
-import(
+import (
 	"fmt"
-	"net/http"
 	"io/ioutil"
+	"net/http"
 )
 
-func main(){
-	url :="http://http-theft-bank.gtainccnu.muxixyz.com/api/v1/organization/code"
-	method :="GET"
-	client :=&http.Client{}
-	request,err :=http.NewRequest(method,url,nil)
-	if err !=nil{
-		fmt.Println(err)
-		return
-	}
-	request.Header.Add("code","250")
-	response,err :=client.Do(request)
-	if err != nil{
-		fmt.Println(err)
-		return
-	}
-	by, _ := ioutil.ReadAll(response.Body)
+func main() {
+	client := &http.Client{}
+	req, _ := http.NewRequest("GET", "http://http-theft-bank.gtainccnu.muxixyz.com/api/v1/organization/code", nil)
+	req.Header.Add("Code", "120")
+	res, _ := client.Do(req)
+	by, _ := ioutil.ReadAll(res.Body)
 	fmt.Println(string(by))
 }
