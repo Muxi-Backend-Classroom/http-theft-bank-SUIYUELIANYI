@@ -1,26 +1,26 @@
 package main
 
-import (
+import(
 	"fmt"
-	"github.com/Grand-Theft-Auto-In-CCNU-MUXI/hacker-support/httptool"
+	"net/http"
+	"io/ioutil"
 )
 
-func main() {
-	req, err := httptool.NewRequest(
-		httptool.GETMETHOD,
-		"http://http-theft-bank.gtainccnu.muxixyz.com/api/v1/organization/code",
-		"",
-		httptool.DEFAULT, // 这里可能不是 DEFAULT，自己去翻阅文档
-	)
-	if err != nil {
+func main(){
+	url :="http://http-theft-bank.gtainccnu.muxixyz.com/api/v1/organization/code"
+	method :="GET"
+	client :=&http.Client{}
+	request,err :=http.NewRequest(method,url,nil)
+	if err !=nil{
 		fmt.Println(err)
+		return
 	}
-	//fmt.Println(req)
-	//resp, err := req.SendRequest()
-	//resp.ShowHeader()
-	//value, err := resp.GetHeader("Passport")
-	//req.AddHeader("Passport",value[0])
-	req.AddHeader("Code","200")
-    resp1, err := req.SendRequest()
-	resp1.ShowBody()
+	request.Header.Add("code","250")
+	response,err :=client.Do(request)
+	if err != nil{
+		fmt.Println(err)
+		return
+	}
+	by, _ := ioutil.ReadAll(response.Body)
+	fmt.Println(string(by))
 }
